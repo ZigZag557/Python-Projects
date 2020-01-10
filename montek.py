@@ -1,10 +1,10 @@
 
-
+import math
 import matplotlib.pyplot as plt
-
+import matplotlib.patches as ptc
 
 def func(x):
-	return x**2
+	return ((x**2)-1)/((x**2)+1)
 
 def getPoints(N,start,end):
 	xPoints = []
@@ -20,20 +20,34 @@ def getPoints(N,start,end):
 
 	return [xPoints,yPoints]
 
+plt.rc('axes', axisbelow=True)
+fig, ax = plt.subplots()
+ax.grid(True, which='both')
+
 def monteCarloApprox(N, start, end):
 
 	total = 0
-	incrementAmt = (end - start)/(N-1)
+	incrementAmt = (end - start)/(N)
 	curXpos = start
 
 	for _ in range(N):
+		if curXpos >= 0:
+			r = ptc.Rectangle((curXpos,0), incrementAmt, func(curXpos), color='blue', fill=False)
+		else:
+			r = ptc.Rectangle((curXpos,0), incrementAmt, func(curXpos + incrementAmt), color='blue', fill=False)
+
+		ax.add_patch(r)
+
 		curXpos += incrementAmt
 		total += incrementAmt * func(curXpos)
-
 	return total
 
-points = getPoints(100,-20,20)
-plt.plot(points[0],points[1])
-print(monteCarloApprox(450, 0, 1))
+points = getPoints(500,-15,15)
+
+ax.axhline(y=0, color='k', zorder = -1)
+ax.axvline(x=0, color='k', zorder = -1)
+ax.plot(points[0],points[1], color= 'red')
+
+print("Definite integral value is approximately: " + str(monteCarloApprox(100,-10,10)))
 plt.show()
 
