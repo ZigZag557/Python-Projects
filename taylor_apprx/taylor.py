@@ -48,7 +48,11 @@ ax.axvline(x=0, color='k', zorder = -1)
 points = getFuncPoints(500,-20, 20, primaryFunction)
 ax.plot(points[0],points[1], color= 'red')
 
-taylorPoints = getFuncPoints(500,0,0, getTaylorFunc(5, 0))
+taylorFunc = getTaylorFunc(11, 0)
+taylorPoints = getFuncPoints(500,-5,5, taylorFunc)
 ax.plot(taylorPoints[0], taylorPoints[1], color= 'blue')
+
+if len(str(taylorFunc)) < 80:
+	ax.set_xlabel("y = " + str(taylorFunc))
 
 plt.show()
