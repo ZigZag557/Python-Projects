@@ -6,7 +6,7 @@ import matplotlib.patches as ptc
 
 x = Symbol('x')
 
-func = sin(x)
+primaryFunction = sin(x)
 
 
 def getFuncPoints(N,start,end, function):
@@ -26,8 +26,8 @@ def getFuncPoints(N,start,end, function):
 
 def getTaylorFunc(N, a):
 
-	funcStr = str(func.subs(x, a))
-	curFuncDer = func
+	funcStr = str(primaryFunction.subs(x, a))
+	curFuncDer = primaryFunction
 
 	for i in range(N):
 		curFuncDer = diff(curFuncDer)
@@ -45,10 +45,10 @@ ax.grid(True, which='both')
 ax.axhline(y=0, color='k', zorder = -1)
 ax.axvline(x=0, color='k', zorder = -1)
 
-points = getFuncPoints(500,-20, 20, func)
+points = getFuncPoints(500,-20, 20, primaryFunction)
 ax.plot(points[0],points[1], color= 'red')
 
-taylorPoints = getFuncPoints(500,-10,10, getTaylorFunc(5, 0))
+taylorPoints = getFuncPoints(500,0,0, getTaylorFunc(5, 0))
 ax.plot(taylorPoints[0], taylorPoints[1], color= 'blue')
 
 plt.show()
