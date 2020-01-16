@@ -53,7 +53,7 @@ ax.grid(True, which='both')
 ax.axhline(y=0, color='k', zorder = -1)
 ax.axvline(x=0, color='k', zorder = -1)
 
-#Draw the primary function graph.
+#drawingw the primary function graph.
 points = getFuncPoints(500,-20, 20, primaryFunction)
 ax.plot(points[0],points[1], color= 'red')
 
