@@ -68,7 +68,7 @@ ax.axvline(x=0, color='k', zorder = -1)
 points = getPoints(500,-15,15)
 ax.plot(points[0],points[1], color= 'red')
 
-# Draw the rectangles and writing approximated integral value.
+# Draw the rectangles and write approximated integral value.
 approxVal = str(riemannSum(500,-10,10))
 ax.set_xlabel("Integral value is approximately: " + approxVal)
 
