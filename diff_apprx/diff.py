@@ -4,9 +4,6 @@
 #--------------------------------------
 
 
-
-
-
 from sympy import *
 import matplotlib.pyplot as plt
 import matplotlib.patches as ptc

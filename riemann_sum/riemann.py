@@ -48,28 +48,38 @@ def riemannSum(N, start, end):
 	curXpos = start
 
 	for _ in range(N):
-		if curXpos >= 0:
-			r = ptc.Rectangle((curXpos,0), incrementAmt, func(curXpos), color='blue', fill=False)
-		else:
-			r = ptc.Rectangle((curXpos,0), incrementAmt, func(curXpos + incrementAmt), color='blue', fill=False)
+		r1 = ptc.Rectangle((curXpos,0), incrementAmt, func(curXpos), color='blue', fill=False)
+		r2 = ptc.Rectangle((curXpos,0), incrementAmt, func(curXpos + incrementAmt), color='blue', fill=False)
 
-		ax.add_patch(r)
+		if curXpos >= 0:
+			if func(curXpos) >= 0:
+				ax.add_patch(r1)
+			else:
+				ax.add_patch(r2)
+		else:
+			if func(curXpos) >= 0:
+				ax.add_patch(r2)
+			else:
+				ax.add_patch(r1)
+
 
 		curXpos += incrementAmt
 		total += incrementAmt * func(curXpos)
 	return total
 #-------------------------------------------------------------------------------------------------
 
+
 # Draw x and y axes.
 ax.axhline(y=0, color='k', zorder = -1)
 ax.axvline(x=0, color='k', zorder = -1)
 
 #Draw the graph.
-points = getPoints(500,-15,15)
-ax.plot(points[0],points[1], color= 'red')
+points = getPoints(1200,-15,15)
+approxVal = str(riemannSum(2000,-10,10))
+
 
 # Draw the rectangles and write approximated integral value.
-approxVal = str(riemannSum(500,-10,10))
+ax.plot(points[0],points[1], color= 'red')
 ax.set_xlabel("Integral value is approximately: " + approxVal)
 
 plt.show()
